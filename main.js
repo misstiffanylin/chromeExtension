@@ -53,6 +53,10 @@ $("#submit").click(function(e){
 
   });
 
+    $("#background").hover(function(){
+      $(this).append('<img id="popcorn" src="popcorn.png"/>');
+    });
+
   $("a").click(function(e){
     window.replace = "www.imdb.com/title/"+showData.imdbID+"/";
   });
@@ -62,7 +66,8 @@ $("#submit").click(function(e){
       console.log(data)
       let episodesArr = data.Episodes;
       sortedArr = episodesArr.sort(function(a, b) {
-        return (a.imdbRating < b.imdbRating);
+        // console.log
+        return (b.imdbRating - a.imdbRating);
      });
 
 
