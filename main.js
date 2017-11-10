@@ -1,76 +1,92 @@
-// var request = require('request');
-// var cheerio = require('cheerio');
-
-// var table2json = require('table2json');
-// table2json.parse(table);
-
-// request('http://www.imdb.com/title/tt0944947/eprate', function (error, response, html) {
-//   console.log('here');
-//   console.log(response.statusCode);
-//   if (!error && response.statusCode == 200) {
-//     console.log(html);
-//   }
-// });
-
-// $(document).ready(() => {
-//   console.log('WHY')
-//   $('#submit').click((e) => {
-//     $.ajax({
-//       url: 'www.imdb.com/title/tt0944947/eprate',
-//       method: 'GET',
-//       success: data => console.log('data', data),
-//       error: function(xhr, status, errorThrown) {
-//         console.log('error?');
-//         xhr.status;
-//         xhr.responseText;
-//       }
-//     })
-//   })
-
 $(document).ready(function() {
+// let counter = 0;
+// Grab the data from button:
 $("#submit").click(function(e){
-//   // using actual title (seperate the words)
+  // counter++;
+   // using actual title (seperate the words)
    e.preventDefault();
-   // console.log(e);
+   // $('#episodes').empty();
+   // separate button into a show api call and a season api call
    let title = $('#title').val();
-   // console.log('title?' + $('#title').val());
-   // console.log('input?' + )
-   let url = "http://www.omdbapi.com/?t="+String(title)+"&Season=1&apikey=297a2582"
-   console.log(url);
-   console.log('fake: ', "http://www.omdbapi.com/?t=Game of Thrones&Season=1&apikey=297a2582")
-   console.log("http://www.omdbapi.com/?t="+String(title)+"&Season=1&apikey=297a2582");
-    $.get(url, function(data){
-        console.log(data)
-    // $.get("http://www.omdbapi.com/?t=Game of Thrones&Season=1&apikey=297a2582", function(data){
-        let episodesArr = data.Episodes;
-        sortedArr = episodesArr.sort(function(a, b) {
-          return (a.imdbRating < b.imdbRating);    
-        });
+   let showUrl = "http://www.omdbapi.com/?t="+String(title)+"&apikey=297a2582"
+   let seasonUrl = "http://www.omdbapi.com/?t="+String(title)+"&Season=1&apikey=297a2582"
 
-    let username = [];
-    console.log(sortedArr);
-    for (let i = 0; i <= 2; i++) {
-      console.log(sortedArr[i].Title);
-      sortedArr[i].Title;
-      let firstP = $("<p>");
-      firstP.attr('class', 'title');
-      firstP.html('<strong>' + sortedArr[i].Title + "</strong> ");
-      let secondP = $("<p>");
-      secondP.html('Episode: ' + sortedArr[i].Episode);
-      let thirdP = $("<p>");
-      thirdP.html('IMDb Rating: ' + sortedArr[i].imdbRating);
-      $("#images").append(firstP).append(secondP).append(thirdP);
-    }
-    });
+   // Parse general show data
+  $.get(showUrl, function(showData){
+    $('#div-1').empty();
+    $('#div-2').empty();
+    $('#div-3').empty();
+    $('#background').empty();
+    $('#info').empty();
+    console.log('showData: ', showData);
+    console.log('Overall Rating: ', showData.imdbRating);
+    console.log('Title: ', showData.Title);
+    console.log('Plot: ', showData.Plot);
+    console.log('Awards: ', showData.Awards);
+    console.log('Released: ', showData.Released);
+    console.log('Actors: ', showData.Actors);
+    console.log('Genre: ', showData.Genre);
+    console.log('IMDB Link: ', "www.imdb.com/title/"+showData.imdbID+"/");
+    console.log('Poster: ', showData.Poster);
+    let plot = showData.Plot;
+    // console.log(plot1.length)
+    // let plot = '';
+    plot = plot.slice(0,Math.floor(plot.length/1.5)) + '...';
+    // }
+    let overallRating = showData.imdbRating;
+    let actors = showData.Actors;
+    let firstP = $('<p>');
+    let link = "www.imdb.com/title/"+showData.imdbID+"/";
+    $('#background').append('<img id="poster" src="'+showData.Poster+'" />');  
+    firstP.html('<strong>Plot:</strong> ' + plot);//plot);
+    let secondP = $("<p>");
+    secondP.html('<strong>Overall Rating:</strong><i class="fa fa-star-o"></i><span style="color: #F5DC7E"><strong> ' + overallRating + '/10</span>');
+    let thirdP = $("<p>");
+    thirdP.html('<strong>Main Actors:</strong> ' + actors);
+    let fourthP = $("<p>");
+    fourthP.html('<a href="'+link+'"">Click for More</a>');
+    console.log('link: ', '<a href='+link+'>Click for More</a>');
+    $('#general-info').append('General Show Info');
+    $('#info').append(firstP).append(secondP).append(thirdP).append(fourthP);
+    // $('#episodes').css("background-color", "rgba(241,241,241,.8)");
+    // $('#episodes').css("color", "blue");
 
-    }); 
+  });
+
+  $("a").click(function(e){
+    window.replace = "www.imdb.com/title/"+showData.imdbID+"/";
+  });
+
+  // Parse show's season episode specific data
+  $.get(seasonUrl, function(data){
+      console.log(data)
+      let episodesArr = data.Episodes;
+      sortedArr = episodesArr.sort(function(a, b) {
+        return (a.imdbRating < b.imdbRating);
+     });
 
 
-
-    // $.get("https://images-na.ssl-images-amazon.com/images/M/MV5BMjE3NTQ1NDg1Ml5BMl5BanBnXkFtZTgwNzY2NDA0MjI@._V1_SX300.jpg", function(data) {
-      // $('#images').append('<img src=https://images-na.ssl-images-amazon.com/images/M/MV5BMjE3NTQ1NDg1Ml5BMl5BanBnXkFtZTgwNzY2NDA0MjI@._V1_SX300.jpg>');
-    // });
-
-
-// });
+  // Update the dom with our data
+  // let username = [];
+  console.log(sortedArr);
+  for (let i = 0; i <= 2; i++) {
+    sortedArr[i].Title;
+    let firstP = $("<p>");
+    firstP.attr('class', 'title');
+    firstP.html('<strong><span style="color: white">Ep. Name:</span> ' + sortedArr[i].Title + "</strong> ");
+    let secondP = $("<p>");
+    secondP.html('<strong>Ep. Num.:</strong> ' + sortedArr[i].Episode);
+    let thirdP = $("<p>");
+    thirdP.html('<strong>IMDb Rating: </strong><span style="color: #F5DC7E"><strong>' + sortedArr[i].imdbRating + '/10</strong> </span>');
+    let x = "#div-"+(i+1);
+    console.log(x)
+    $(x).append(firstP).append(secondP).append(thirdP);
+  }
+  });
+ });
+    //  OK to DELETE?
+    // $.get("https://images-na.ssl-images-amazon.com/images/M/MV5BMjE3NTQ1NDg1Ml5BMl5BanBnXkFtZTgwNzY2NDA0MjI@._V1_SX300.jpg"), function(data) {
+    //   let newDiv = $('<div>');
+    //   newDiv.attr("id", );
+    // }
 });

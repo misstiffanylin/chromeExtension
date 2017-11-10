@@ -3,7 +3,7 @@
   "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'",
   "manifest_version": 2,
 
-  "name": "Skip the Boring Part",
+  "name": "Skip It",
   "description": "This extension allows the user to choose a best episode to start a new series on.",
   "version": "1.0",
 
@@ -12,7 +12,7 @@
     "default_popup": "index.html",
     "default_title": "Click here!"
   },
-
+  "web_accessible_resources": ["*.ttf" ],
   "permissions": [
     "activeTab",
     "storage"

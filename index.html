@@ -8,15 +8,26 @@
   <head>
     <title>Skip the Boring Part</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+    <link rel="stylesheet" href
     <style type="text/css">
+      html{
+        min-width: 100%;
+      }
       body {
         margin: 10px;
         white-space: nowrap;
+        min-width: 100%;
+        margin-left: 10px;
+        margin-right: 100px;
+        background-color: black;
+        color: #F5F5F5;
+        font: arial;
       }
 
       h1 {
-        font-size: 15px;
+        font-size: 20px;
+        font-weight: 800;
+        text-align: center;
       }
 
       #container {
@@ -24,6 +35,68 @@
         display: flex;
         justify-content: space-between;
       }
+
+      #episodes{
+        display: grid;
+        grid-template-columns: 2fr, 2fr, 2fr;
+      }
+      #div-1{
+        grid-column-start: 0;
+        grid-column-end: 2;
+      }
+      #div-2{
+        grid-column-start: 2;
+        grid-column-end: 4;
+      }
+      #div-3{
+        grid-column-start: 4;
+        grid-column-end: 6;
+      }
+
+      #info {
+        margin: auto;
+      }
+
+      #poster {
+        height: 150px;
+      }
+
+      a {
+        color: #b1b1b1;
+        text-decoration: none;
+      }
+
+      p {
+         max-width:50%;
+         word-wrap:break-word;
+      }
+      #bottom{
+        justify-content: flex-start;
+        display: inline-flex;
+        flex-direction: row;
+/*        display: grid;
+        grid-template-columns: 1fr, 2fr;*/
+      }
+      #background{
+     /*   grid-column-start: 0;
+        grid-column-end: 1;*/
+        /*margin-right: 2px;
+        float: left;*/
+      }
+      #info{
+        /*width: 100px;*/
+        /*grid-column-start: 1;
+        grid-column-end: 3;*/
+       /* float: left;*/
+      }
+
+      .title {
+        color: #f2cc2e;
+      }
+
+    /*  .clear-float {
+        clear: both;
+      }*/
     </style>
 
     <!--
@@ -36,13 +109,21 @@
   </head>
 
   <body>
-    <h1></h1>
-    <form id="input">
+<!--     <h1>Skip It</h1>
+ -->    <form id="input">
       <input id="title" type="text" placeholder="What show?">
       <input type="submit" value="Submit" id="submit">
     </form>
-    <div id="images">
-
-    </div>
-  </body>
+      <div id="episodes">
+        <div id="div-1"></div>
+        <div id="div-2"></div>
+        <div id="div-3"></div>
+      </div>
+      <div id="#bottom">
+        <div id="background"></div>
+        <div id="info">
+          <h1 id="general-info"></h1>
+        </div>
+      </div>
+    </body>
 </html>
