@@ -10,14 +10,15 @@ $("#submit").click(function(e){
    let title = $('#title').val();
    let showUrl = "http://www.omdbapi.com/?t="+String(title)+"&apikey=297a2582"
    let seasonUrl = "http://www.omdbapi.com/?t="+String(title)+"&Season=1&apikey=297a2582"
-
    // Parse general show data
   $.get(showUrl, function(showData){
     $('#div-1').empty();
     $('#div-2').empty();
     $('#div-3').empty();
     $('#background').empty();
+    // $('popcorn-maker').style.display = 'none';
     $('#info').empty();
+    // $('#popcorn-maker').empty();
     console.log('showData: ', showData);
     console.log('Overall Rating: ', showData.imdbRating);
     console.log('Title: ', showData.Title);
@@ -48,13 +49,38 @@ $("#submit").click(function(e){
     console.log('link: ', '<a href='+link+'>Click for More</a>');
     $('#general-info').append('General Show Info');
     $('#info').append(firstP).append(secondP).append(thirdP).append(fourthP);
-    // $('#episodes').css("background-color", "rgba(241,241,241,.8)");
+    // $('#episodes').css("biskground-color", "rgba(241,241,241,.8)");
     // $('#episodes').css("color", "blue");
 
   });
 
-    $("#background").hover(function(){
-      $(this).append('<img id="popcorn" src="popcorn.png"/>');
+    $("#background").click(function(){
+      // POPCORN ON THE TOP
+      $('#popcorn-maker').prepend('<img id="popcorn" src="popcorn.png"/>');
+      $('#popcorn-maker').prepend('<img id="popcorn" src="popcorn.png"/>');
+      $('#popcorn-maker').prepend('<img id="popcorn" src="popcorn.png"/>');
+      $('#popcorn-maker').prepend('<img id="popcorn" src="popcorn.png"/>');
+      $('#popcorn-maker').prepend('<img id="popcorn" src="popcorn.png"/>');
+      $('#popcorn-maker').prepend('<img id="popcorn" src="popcorn.png"/>');
+      $('#popcorn-maker').prepend('<img id="popcorn" src="popcorn.png"/>');
+      $('#popcorn-maker').prepend('<img id="popcorn" src="popcorn.png"/>');
+      $('#popcorn-maker').prepend('<img id="popcorn" src="popcorn.png"/>');
+      $('#popcorn-maker').prepend('<img id="popcorn" src="popcorn.png"/>');
+      $('#popcorn-maker').prepend('<img id="popcorn" src="popcorn.png"/>');
+      $('#popcorn-maker').prepend('<img id="popcorn" src="popcorn.png"/>');
+      // POPCORN ON THE BOTTOM 
+      $('#popcorn-eater').prepend('<img id="popcorn" src="popcorn.png"/>');
+      $('#popcorn-eater').prepend('<img id="popcorn" src="popcorn.png"/>');
+      $('#popcorn-eater').prepend('<img id="popcorn" src="popcorn.png"/>');
+      $('#popcorn-eater').prepend('<img id="popcorn" src="popcorn.png"/>');
+      $('#popcorn-eater').prepend('<img id="popcorn" src="popcorn.png"/>');
+      $('#popcorn-eater').prepend('<img id="popcorn" src="popcorn.png"/>');
+      $('#popcorn-eater').prepend('<img id="popcorn" src="popcorn.png"/>');
+      $('#popcorn-eater').prepend('<img id="popcorn" src="popcorn.png"/>');
+      $('#popcorn-eater').prepend('<img id="popcorn" src="popcorn.png"/>');
+      $('#popcorn-eater').prepend('<img id="popcorn" src="popcorn.png"/>');
+      $('#popcorn-eater').prepend('<img id="popcorn" src="popcorn.png"/>');
+      $('#popcorn-eater').prepend('<img id="popcorn" src="popcorn.png"/>');     
     });
 
   $("a").click(function(e){

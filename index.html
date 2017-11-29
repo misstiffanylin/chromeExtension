@@ -88,7 +88,24 @@
       }
 
       #popcorn {
-        height: 50px;
+        height: 30px;
+        animation: popcorn 5s;
+        position: relative;
+        margin-right: 10px;
+      }
+
+     /* .topFire {
+      width: 120px;
+      height: 120px;
+      position: fixed;
+      */
+      }
+
+     @keyframes popcorn {
+      0%   {top: 0px;}
+      25%  {transform: translateY(100px);}
+      75%  {top: 50px}
+      100% {top: 500px;}
       }
 
      /* .clear-float {
@@ -107,7 +124,10 @@
 
   <body>
 <!--     <h1>Skip It</h1>
- -->    <form id="input">
+      <di
+ -->  
+      <div id="popcorn-maker"></div>
+      <form id="input">
       <input id="title" type="text" placeholder="What show?">
       <input type="submit" value="Submit" id="submit">
     </form>
@@ -122,5 +142,7 @@
 <!--           <h1 id="general-info"></h1>
  -->        </div>
       </div>
+    <div id="popcorn-eater"></div>
+
     </body>
 </html>
